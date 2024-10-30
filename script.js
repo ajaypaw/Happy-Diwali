@@ -71,6 +71,7 @@ class PointerParticles extends HTMLElement {
       my: 0
     };
     this.hue = 0;
+    this.sound = new Audio("./mixkit-firework-rockets-exploding-in-the-sky-2993.wav")
   }
 
   connectedCallback() {
@@ -116,9 +117,12 @@ class PointerParticles extends HTMLElement {
         speed: Math.random() + 1,
         spread: Math.random() + 50
       });
+
+      this.sound.currentTime = 0; // Reset sound to the beginning
+         this.sound.play();
     });
 
-    parent.addEventListener("pointermove", (event) => {
+    parent.addEventListener("pointermov", (event) => {
       this.createParticles(event, {
         count: 20,
         speed: this.getPointerVelocity(event),
